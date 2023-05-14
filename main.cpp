@@ -10,6 +10,7 @@
 #include <gflags/gflags.h>
 #include <glog/logging.h>
 
+#include "car_controller.h"
 #include "joystick_xbox.h"
 
 DECLARE_bool(JOY_STICK_DEBUG);
