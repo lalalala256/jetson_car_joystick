@@ -1,0 +1,2 @@
+
+sudo apt install libgflags-dev libgoogle-glog-dev libserial-dev
