@@ -129,3 +129,7 @@ void JoystickXBox::PrintData()
     printf("\n");
     fflush(stdout);
 }
+
+Coor JoystickXBox::GetCommand() {
+    return Coor{.x=axis_[0], .y=axis_[1]};
+}

@@ -2,6 +2,10 @@
 #include <linux/joystick.h>
 #include <string>
 
+struct Coor  {
+  int x = 0;
+  int y = 0;
+};
 class JoystickXBox
 {
 public:
@@ -25,6 +29,7 @@ public:
     void PrintData();
     void ProcessData(const struct js_event &js);
 
+    Coor GetCommand();
 private:
     bool debug_ = true;
     int fd_ = -1;
