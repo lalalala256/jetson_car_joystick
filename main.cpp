@@ -8,6 +8,7 @@
 #include <unistd.h>
 
 #include <gflags/gflags.h>
+#include <glog/logging.h>
 
 #include "joystick_xbox.h"
 

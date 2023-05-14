@@ -6,6 +6,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+
 #include "joystick_xbox.h"
 
 JoystickXBox::JoystickXBox(const std::string &dev_name) : fd_(-1),dev_name_(dev_name)
