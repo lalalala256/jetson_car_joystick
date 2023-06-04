@@ -6,19 +6,22 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <vector>
 
-#include <gflags/gflags.h>
 #include <glog/logging.h>
+#include <SerialPort.h>
 
 #include "car_controller.h"
 #include "joystick_xbox.h"
 
-DECLARE_bool(JOY_STICK_DEBUG);
-
-DEFINE_bool(JOY_STICK_DEBUG, true, "open joy stick debug flag.");
-
 int main()
 {
+    SerialPort serial_port("/dev/ttyTHS1");
+    serial_port.Open(SerialPort::BAUD_115200);
+    // Only for test serial read.
+    // LOG(INFO) << serial_port.ReadLine();
+    CarController car_controller;
+
 	bool ret = false;
     int err_cnt = 0;
     fd_set rfds;
@@ -37,7 +40,7 @@ int main()
 
     while (1)
     {
-        usleep(100);
+        usleep(1000);
         timeout.tv_sec = 1;
         timeout.tv_usec = 0;
         FD_ZERO(&rfds);
@@ -49,12 +52,15 @@ int main()
             if (ret)
             {
                 joystick_xbox->ProcessData(js);
+                Coor coor = joystick_xbox->GetCommand();
+                car_controller.SetMoveParam(coor.x, coor.y);
+                serial_port.Write(car_controller.GetCommand());
             }
         }
     }
 
     joystick_xbox->Close();
-
-    return 0;	
+    serial_port.Close();
+    return 0;
 }
 

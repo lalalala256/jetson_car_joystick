@@ -131,5 +131,5 @@ void JoystickXBox::PrintData()
 }
 
 Coor JoystickXBox::GetCommand() {
-    return Coor{.x=axis_[0], .y=axis_[1]};
+    return Coor{.x=axis_[1], .y=axis_[0]};
 }
