@@ -1,4 +1,4 @@
-
+#include <vector>
 /*
     car direction:
        y
@@ -14,6 +14,7 @@ class CarController{
  public:
   CarController();
   void SetMoveParam(int x, int y, int z = 0);
+  std::vector<unsigned char> GetCommand() { return command; }
  private:
-  unsigned char command[10];
+  std::vector<unsigned char> command;
 };
