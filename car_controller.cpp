@@ -4,7 +4,6 @@
 
 #include "car_controller.h"
 #include "gflags.h"
-#include "glog/logging.h"
 
 CarController::CarController() {
   command.resize(10);
@@ -30,10 +29,6 @@ void CarController::SetMoveParam(int x, int y, int z) {
   command[6] = y % 256;
   command[7] = z / 256;
   command[8] = z % 256;
-  command[9] = x_flag << 2 | y_flag << 1 | z_flag;
-  std::string x_sign = ""; if(x_flag != 0) x_sign = "-";
-  std::string y_sign = ""; if(y_flag != 0) y_sign = "-";
-  std::string z_sign = ""; if(z_flag != 0) z_sign = "-";
-  LOG(INFO) << "x=" << x_sign.c_str() << x << ", y=" << y_sign.c_str() << y << ", z=" << z_sign.c_str() << z;
+  command[9] = x_flag << 2 | y_flag << 1 | z_flag; 
 }
 
