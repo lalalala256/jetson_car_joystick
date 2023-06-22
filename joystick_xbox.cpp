@@ -8,6 +8,7 @@
 #include <unistd.h>
 
 #include "joystick_xbox.h"
+#include "gflags.h"
 
 JoystickXBox::JoystickXBox(const std::string &dev_name) : fd_(-1),dev_name_(dev_name)
 {
@@ -131,5 +132,12 @@ void JoystickXBox::PrintData()
 }
 
 Coor JoystickXBox::GetCommand() {
+    if (button_[7]) {
+        FLAGS_SpeedLimit *= 2;
+        if (FLAGS_SpeedLimit > 65535) FLAGS_SpeedLimit = FLAGS_SpeedLimit;
+    }
+    if (button_[6]) {
+        FLAGS_SpeedLimit /= 2;
+    }
     return Coor{.x=axis_[1], .y=axis_[0]};
 }
