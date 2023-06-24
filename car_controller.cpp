@@ -1,8 +1,9 @@
+#include "car_controller.h"
+
 #include <string.h>
 #include <cmath>
 #include <stdio.h>
 
-#include "car_controller.h"
 #include "gflags.h"
 
 CarController::CarController() {

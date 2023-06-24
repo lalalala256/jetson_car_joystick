@@ -30,6 +30,7 @@ public:
     void ProcessData(const struct js_event &js);
 
     Coor GetCommand();
+    void SpeedLimitControl();
 private:
     bool debug_ = true;
     int fd_ = -1;
