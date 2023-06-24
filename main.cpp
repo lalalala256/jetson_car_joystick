@@ -53,7 +53,7 @@ int main()
             {
                 joystick_xbox->ProcessData(js);
                 Coor coor = joystick_xbox->GetCommand();
-                car_controller.SetMoveParam(coor.y, -coor.x);
+                car_controller.SetMoveParam(coor.y, -coor.x, coor.yaw);
                 serial_port.Write(car_controller.GetCommand());
             }
         }

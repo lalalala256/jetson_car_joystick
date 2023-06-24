@@ -135,7 +135,14 @@ void JoystickXBox::PrintData()
 Coor JoystickXBox::GetCommand()
 {
     SpeedLimitControl();
-    return Coor{.x=axis_[1], .y=axis_[0]};
+    int yaw = 0;
+    if (button_[4]==1)
+        yaw = 0x002f;
+    else if (button_[5]==1)
+        yaw = -0x002f;
+    else
+        yaw = 0;
+    return Coor{.x=axis_[1], .y=axis_[0], .yaw=yaw};
 }
 
 void JoystickXBox::SpeedLimitControl()

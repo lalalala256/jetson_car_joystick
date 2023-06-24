@@ -5,6 +5,7 @@
 struct Coor  {
   int x = 0;
   int y = 0;
+  int yaw = 0;
 };
 class JoystickXBox
 {
