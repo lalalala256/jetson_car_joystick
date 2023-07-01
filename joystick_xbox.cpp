@@ -148,9 +148,9 @@ Coor JoystickXBox::GetCommand()
 void JoystickXBox::SpeedLimitControl()
 {
     if (button_[7] == 1)
-        FLAGS_SpeedLimit *= 2;
+        FLAGS_SpeedLimit *= 1.5;
     else if (button_[6] == 1)
-        FLAGS_SpeedLimit /= 2;
+        FLAGS_SpeedLimit /= 1.5;
 
     if (FLAGS_SpeedLimit > 32768)
         FLAGS_SpeedLimit = 32768;
