@@ -7,7 +7,7 @@
 #include "gflags.h"
 
 CarController::CarController() {
-  command.resize(10);
+  command.resize(11);
   memset(command.data(), 0, command.size());
   command[0] = 0xff;
   command[1] = 0xfe;
