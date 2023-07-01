@@ -152,6 +152,6 @@ void JoystickXBox::SpeedLimitControl()
     else if (button_[6] == 1)
         FLAGS_SpeedLimit /= 2;
 
-    if (FLAGS_SpeedLimit > 65535)
-        FLAGS_SpeedLimit *= 2;
+    if (FLAGS_SpeedLimit > 32768)
+        FLAGS_SpeedLimit = 32768;
 }
