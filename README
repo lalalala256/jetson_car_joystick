@@ -1,2 +1,10 @@
 
 sudo apt install libgflags-dev libgoogle-glog-dev libserial-dev
+
+生成core文件，默认的core文件不知道生成哪里去了
+sudo bash -c 'echo "/tmp/core-%e-%p-%t" >  /proc/sys/kernel/core_pattern'
+sudo bash -c "ulimit -c unlimited && ./build/nano-joystick"
+
+默认的core文件生成路径配置是这样的，不知道生成到哪里去了。
+nv@nv-desktop:/tmp$ cat /proc/sys/kernel/core_pattern 
+|/usr/share/apport/apport %p %s %c %d %P %E
