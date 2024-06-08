@@ -14,7 +14,8 @@ class CarController{
  public:
   CarController();
   void SetMoveParam(int x, int y, int z = 0);
-  std::vector<unsigned char> GetCommand() { return command; }
+  std::vector<unsigned char> GetCommand() { return command_; }
  private:
-  std::vector<unsigned char> command;
+  std::vector<unsigned char> command_;
+  int speed_limit_ = 0;
 };

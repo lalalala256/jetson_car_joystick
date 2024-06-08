@@ -7,11 +7,12 @@
 #include "gflags.h"
 
 CarController::CarController() {
-  command.resize(11);
-  memset(command.data(), 0, command.size());
-  command[0] = 0xff;
-  command[1] = 0xfe;
-  command[2] = ControlMode::CoordinateMode;
+  speed_limit_ = FLAGS_SpeedLimit;
+  command_.resize(11);
+  memset(command_.data(), 0, command_.size());
+  command_[0] = 0xff;
+  command_[1] = 0xfe;
+  command_[2] = ControlMode::CoordinateMode;
 }
 
 void CarController::SetMoveParam(int x, int y, int z) {
@@ -21,15 +22,15 @@ void CarController::SetMoveParam(int x, int y, int z) {
   x = abs(x);
   y = abs(y);
   z = abs(z);
-  if (x > FLAGS_SpeedLimit) x = FLAGS_SpeedLimit;
-  if (y > FLAGS_SpeedLimit) y = FLAGS_SpeedLimit;
-  // if (z > FLAGS_SpeedLimit) z = FLAGS_SpeedLimit;
-  command[3] = x / 256;
-  command[4] = x % 256;
-  command[5] = y / 256;
-  command[6] = y % 256;
-  command[7] = z / 256;
-  command[8] = z % 256;
-  command[9] = x_flag << 2 | y_flag << 1 | z_flag; 
+  if (x > speed_limit_) x = speed_limit_;
+  if (y > speed_limit_) y = speed_limit_;
+  // if (z > speed_limit_) z = speed_limit_;
+  command_[3] = x / 256;
+  command_[4] = x % 256;
+  command_[5] = y / 256;
+  command_[6] = y % 256;
+  command_[7] = z / 256;
+  command_[8] = z % 256;
+  command_[9] = x_flag << 2 | y_flag << 1 | z_flag;
 }
 

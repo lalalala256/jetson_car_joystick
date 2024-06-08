@@ -1,6 +1,8 @@
 
 sudo apt install libgflags-dev libgoogle-glog-dev libserial-dev
 
+cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ../
+
 生成core文件，默认的core文件不知道生成哪里去了
 sudo bash -c 'echo "/tmp/core-%e-%p-%t" >  /proc/sys/kernel/core_pattern'
 sudo bash -c "ulimit -c unlimited && ./build/nano-joystick"
