@@ -2,36 +2,30 @@
 #include <linux/joystick.h>
 #include <string>
 
-struct Coor  {
+struct Coor {
   int x = 0;
   int y = 0;
   int yaw = 0;
   int speed_control = 0;
 };
 
-class JoystickXBox
-{
- public:
+class JoystickXBox {
+public:
   JoystickXBox(const std::string &dev_name);
   ~JoystickXBox();
   bool Open();
   void Close();
   bool Read(struct js_event &js);
-  unsigned char GetAxes() {
-    return axes_;
-  }
-  unsigned char GetButtons() {
-    return buttons_;
-  }
-  int GetFd() {
-	return fd_;
-  }
+  unsigned char GetAxes() { return axes_; }
+  unsigned char GetButtons() { return buttons_; }
+  int GetFd() { return fd_; }
   void PrintData();
   void ProcessData(const struct js_event &js);
 
   Coor GetCommand();
   int SpeedLimitControl();
- private:
+
+private:
   bool debug_ = true;
   int fd_ = -1;
   std::string dev_name_ = "";
@@ -42,4 +36,3 @@ class JoystickXBox
   int *axis_ = nullptr;
   char *button_ = nullptr;
 };
-

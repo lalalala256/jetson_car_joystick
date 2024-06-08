@@ -1,8 +1,8 @@
 #include "car_controller.h"
 
-#include <string.h>
 #include <cmath>
 #include <stdio.h>
+#include <string.h>
 
 #include "gflags.h"
 
@@ -21,7 +21,7 @@ CarController::CarController() noexcept {
 
 CarController::~CarController() noexcept {
   serial_port_->Close();
-  delete(serial_port_);
+  delete (serial_port_);
 }
 
 void CarController::SetMoveParam(int x, int y, int z, int speed_control) {
@@ -32,8 +32,10 @@ void CarController::SetMoveParam(int x, int y, int z, int speed_control) {
   x = abs(x);
   y = abs(y);
   z = abs(z);
-  if (x > speed_limit_) x = speed_limit_;
-  if (y > speed_limit_) y = speed_limit_;
+  if (x > speed_limit_)
+    x = speed_limit_;
+  if (y > speed_limit_)
+    y = speed_limit_;
   // if (z > speed_limit_) z = speed_limit_;
   command_[3] = x / 256;
   command_[4] = x % 256;
@@ -47,7 +49,7 @@ void CarController::SetMoveParam(int x, int y, int z, int speed_control) {
 void CarController::ChangeSpeed(int speed_control) {
   if (speed_control == 1) {
     if (speed_limit_ < 4)
-      speed_limit_ ++;
+      speed_limit_++;
     else
       speed_limit_ *= 1.4;
   } else if (speed_control == 0) {
@@ -59,7 +61,7 @@ void CarController::ChangeSpeed(int speed_control) {
   if (speed_limit_ >= 32768)
     speed_limit_ = 32767;
   if (speed_limit_ < 1)
-    speed_limit_ =1;
+    speed_limit_ = 1;
 }
 
 void CarController::WriteCommand() noexcept {
