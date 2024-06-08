@@ -15,14 +15,14 @@ enum ControlMode {CoordinateMode = 0x01, MotorSpeedMode = 0x02};
 
 class CarController{
  public:
-  CarController();
-  ~CarController();
+  CarController() noexcept;
+  ~CarController() noexcept;
   void SetMoveParam(int x, int y, int z = 0, int speed_control = 0);
   std::vector<unsigned char> GetCommand() { return command_; }
   // speed_control = 1: speed up
   // speed_control = 0: no change
   // speed_control = -1: speed down
-  void WriteCommand();
+  void WriteCommand() noexcept;
  private:
   std::vector<unsigned char> command_;
   int speed_limit_ = 0;

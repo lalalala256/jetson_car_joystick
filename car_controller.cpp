@@ -6,7 +6,7 @@
 
 #include "gflags.h"
 
-CarController::CarController() {
+CarController::CarController() noexcept {
   serial_port_ = new SerialPort("/dev/ttyTHS1");
   serial_port_->Open(SerialPort::BAUD_115200);
   // Only for test serial read.
@@ -19,7 +19,7 @@ CarController::CarController() {
   command_[2] = ControlMode::CoordinateMode;
 }
 
-CarController::~CarController() {
+CarController::~CarController() noexcept {
   serial_port_->Close();
   delete(serial_port_);
 }
@@ -62,6 +62,6 @@ void CarController::ChangeSpeed(int speed_control) {
     speed_limit_ =1;
 }
 
-void CarController::WriteCommand() {
+void CarController::WriteCommand() noexcept {
   serial_port_->Write(GetCommand());
 }
