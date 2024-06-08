@@ -134,7 +134,6 @@ void JoystickXBox::PrintData()
 
 Coor JoystickXBox::GetCommand()
 {
-    SpeedLimitControl();
     int yaw = 0;
     if (button_[4]==1)
         yaw = 0x002f;
@@ -142,22 +141,15 @@ Coor JoystickXBox::GetCommand()
         yaw = -0x002f;
     else
         yaw = 0;
-    return Coor{.x=axis_[1], .y=axis_[0], .yaw=yaw};
+    return Coor{.x=axis_[1], .y=axis_[0], .yaw=yaw, .speed_control=SpeedLimitControl()};
 }
 
-void JoystickXBox::SpeedLimitControl()
+int JoystickXBox::SpeedLimitControl()
 {
-    if (button_[7] == 1) {
-        if (FLAGS_SpeedLimit < 4)
-            FLAGS_SpeedLimit ++;
-        else
-            FLAGS_SpeedLimit *= 1.4;
-    } else if (button_[6] == 1) {
-        FLAGS_SpeedLimit /= 1.4;
-    }
-    printf("Speedlimit: %d\n", FLAGS_SpeedLimit);
-    if (FLAGS_SpeedLimit >= 32768)
-        FLAGS_SpeedLimit = 32767;
-    if (FLAGS_SpeedLimit < 1)
-        FLAGS_SpeedLimit =1;
+    if (button_[6] == 1)
+      return -1;
+    else if (button_[7] == 1)
+      return 1;
+    else
+      return 0;
 }

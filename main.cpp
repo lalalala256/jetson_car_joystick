@@ -9,17 +9,13 @@
 #include <vector>
 
 #include <glog/logging.h>
-#include <SerialPort.h>
+
 
 #include "car_controller.h"
 #include "joystick_xbox.h"
 
 int main()
 {
-    SerialPort serial_port("/dev/ttyTHS1");
-    serial_port.Open(SerialPort::BAUD_115200);
-    // Only for test serial read.
-    // LOG(INFO) << serial_port.ReadLine();
     CarController car_controller;
 
 	bool ret = false;
@@ -53,14 +49,14 @@ int main()
             {
                 joystick_xbox->ProcessData(js);
                 Coor coor = joystick_xbox->GetCommand();
-                car_controller.SetMoveParam(coor.y, -coor.x, coor.yaw);
-                serial_port.Write(car_controller.GetCommand());
+                car_controller.SetMoveParam(coor.y, -coor.x, coor.yaw, coor.speed_control);
+                car_controller.WriteCommand();
             }
         }
     }
 
     joystick_xbox->Close();
-    serial_port.Close();
+
     return 0;
 }
 
