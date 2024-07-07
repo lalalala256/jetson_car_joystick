@@ -3,6 +3,7 @@
 #include <cmath>
 #include <stdio.h>
 #include <string.h>
+#include <stdexcept>
 
 #include "gflags.h"
 
@@ -65,5 +66,10 @@ void CarController::ChangeSpeed(int speed_control) {
 }
 
 void CarController::WriteCommand() noexcept {
-  serial_port_->Write(GetCommand());
+  try {
+    serial_port_->Write(GetCommand());
+  } catch(std::exception& e) {
+    printf("serial write failed: %s\n", e.what());
+    exit(-1);
+  }
 }

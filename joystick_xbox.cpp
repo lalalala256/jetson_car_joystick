@@ -37,8 +37,9 @@ bool JoystickXBox::Open() {
   fd = open(dev_name_.c_str(), O_RDONLY | O_NONBLOCK);
   if (fd < 0) {
     fd_ = -1;
-    printf("JoystickXBox open %s error, %d(%s)\n", dev_name_.c_str(), errno,
-           strerror(errno));
+    printf("Exit. JoystickXBox open %s error, %d(%s)\n", dev_name_.c_str(),
+           errno, strerror(errno));
+    exit(-1);
     return false;
   }
 
@@ -73,7 +74,9 @@ bool JoystickXBox::Read(struct js_event &js) {
   memset(&js, 0, sizeof(js));
   len = read(fd_, &js, sizeof(struct js_event));
   if (len != sizeof(struct js_event)) {
-    printf("JoystickXBox: error reading, %d(%s)\n", errno, strerror(errno));
+    printf("Exit. JoystickXBox: error reading, %d(%s)\n", errno,
+           strerror(errno));
+    exit(-1);
     return false;
   }
 
