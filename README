@@ -10,6 +10,7 @@ sudo bash -c 'echo "/tmp/core-%e-%p-%t" >  /proc/sys/kernel/core_pattern' && sud
 nv@nv-desktop:/tmp$ cat /proc/sys/kernel/core_pattern 
 |/usr/share/apport/apport %p %s %c %d %P %E
 
+service文件写法可参考 https://www.jinbuguo.com/systemd/systemd.service.html#
 复制jetson-car-joystick.service到/lib/systemd/system/jetson-car-joystick.service，
 systemctl enable jetson-car-joystick.service 设置自启动
 systemctl start jetson-car-joystick.service 启动服务
