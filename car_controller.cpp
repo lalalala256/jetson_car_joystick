@@ -30,13 +30,14 @@ void CarController::SetMoveParam(int x, int y, int z, int speed_control) {
   int x_flag = (x >= 0 ? 0 : 1);
   int y_flag = (y >= 0 ? 0 : 1);
   int z_flag = (z >= 0 ? 0 : 1);
-  x = abs(x);
-  y = abs(y);
-  z = abs(z);
+  x = abs(x)/32768.0*speed_limit_;
+  y = abs(y)/32768.0*speed_limit_;
+  z = abs(z)/32768.0*speed_limit_;
   if (x > speed_limit_)
     x = speed_limit_;
   if (y > speed_limit_)
     y = speed_limit_;
+  printf("x: %d, y: %d, z: %d, limit, %d\n", x, y, z, speed_limit_);
   // if (z > speed_limit_) z = speed_limit_;
   command_[3] = x / 256;
   command_[4] = x % 256;
