@@ -123,9 +123,9 @@ void JoystickXBox::PrintData() {
 Coor JoystickXBox::GetCommand() {
   int yaw = 0;
   if (button_[4] == 1)
-    yaw = 0x002f;
+    yaw = 0x003f;
   else if (button_[5] == 1)
-    yaw = -0x002f;
+    yaw = -0x003f;
   else
     yaw = 0;
   return Coor{.x = axis_[1],

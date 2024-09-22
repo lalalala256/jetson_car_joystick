@@ -32,7 +32,7 @@ void CarController::SetMoveParam(int x, int y, int z, int speed_control) {
   int z_flag = (z >= 0 ? 0 : 1);
   x = abs(x)/32768.0*speed_limit_;
   y = abs(y)/32768.0*speed_limit_;
-  z = abs(z)/32768.0*speed_limit_;
+  z = abs(z);
   if (x > speed_limit_)
     x = speed_limit_;
   if (y > speed_limit_)
